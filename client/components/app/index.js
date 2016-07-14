@@ -1,5 +1,7 @@
 import React from 'react';
 
+const testClick = () => alert('hello!'); 
+
 const App = () => (
   <div>
     <p>Hello Coffee Automation! From App!</p>
