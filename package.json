@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Pallandor/kindle-and-coffee/issues"
   },
-  "homepage": "https://github.com/Pallandor/kindle-and-coffee#readme"
+  "homepage": "https://github.com/Pallandor/kindle-and-coffee#readme",
+  "devDependencies": {
+    "webpack": "1.13.1"
+  }
 }
