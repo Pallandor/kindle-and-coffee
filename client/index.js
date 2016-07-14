@@ -1,2 +1,6 @@
 // test function for code transpilation
-const x = input => input * 5;
+const x = () => {
+  alert('test interaction with browser!');
+};
+
+x(); 

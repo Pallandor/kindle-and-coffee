@@ -1,5 +1,6 @@
 const path = require('path');
 const loaders = require('./webpack/loaders');
+const plugins = require('./webpack/plugins'); 
 
 module.exports = {
   entry: path.join(__dirname, 'client/index.js'),
@@ -10,6 +11,8 @@ module.exports = {
   },
 
   devtool: 'source-map',
+
+  plugins,
 
   module: {
     loaders: [
