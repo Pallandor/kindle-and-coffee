@@ -1,21 +1,15 @@
-// import browser from './webdriver.config.js';
+import browser, * as config from './webdriver.config.js';
 
-const webdriverio = require('webdriverio');
-const options = {
-  desiredCapabilities: {
-    browserName: 'firefox',
-  },
-};
-
-const automationMiddleware = (req, res) => {
-  webdriverio.remote(options)
+const automationHandler = (req, res) => {
+  browser
     .init()
-    .url('https://google.com.au/')
-    .setValue('#lst-ib', 'Roger is Awesome')
-    .click('[name="btnK"]')
+    .url(config.url)
+    .setValue(config.searchBar, config.message)
+    .click(config.buttonByName)
     .getTitle()
     .then(title => res.send(`The title received was ${title}`))
+    .pause(config.waitTime)
     .end();
 };
 
-export default automationMiddleware;
+export default automationHandler;
