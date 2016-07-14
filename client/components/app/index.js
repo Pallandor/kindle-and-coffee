@@ -1,6 +1,8 @@
 import React from 'react';
 
-const testClick = () => alert('hello!'); 
+const testClick = () => {
+  alert('blah!'); 
+};
 
 const App = () => (
   <div>
