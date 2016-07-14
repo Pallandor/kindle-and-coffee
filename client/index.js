@@ -1,6 +1,12 @@
-// test function for code transpilation
-const x = () => {
-  alert('test interaction with browser!');
-};
+// Working ES6 transpilation!
 
-x(); 
+// Attempt to import npm package.
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(
+  <div>
+    Hello Coffee Automation!
+  </div>,
+  document.getElementById('root')
+);

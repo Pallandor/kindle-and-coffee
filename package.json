@@ -34,5 +34,9 @@
     "html-webpack-plugin": "2.22.0",
     "webpack": "1.13.1",
     "webpack-split-by-path": "0.1.0"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-dom": "15.2.1"
   }
 }
