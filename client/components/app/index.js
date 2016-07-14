@@ -36,13 +36,23 @@ class App extends Component {
         <p>Hello Coffee Automation! From App Component!</p>
         <button onClick={this.handleClick}>Click me to order your 1kg of coffee!</button>
       </div>
-    )
+    );
   }
 
   renderIframe() {
+    const testAutomationHandler = (iframe) => {
+      const innerWindow = iframe.contentWindow || iframe.contentDocument;
+      // console.log('testAutomationHandler got invoked!');
+      // const quickOrderBtn = innerWindow.querySelector('span[data-modal-id="636"]');
+      // console.log(quickOrderBtn); 
+      // quickOrderBtn.click();
+    };
+
     return (
-      <iframe src={url} style={iframeStyle}>{iframesUnsupportedMsg}</iframe>
-    )
+      <iframe src={url} style={iframeStyle} ref={testAutomationHandler}>{iframesUnsupportedMsg}</iframe>
+      // check in componentdidmount if state.loadwebsite = true; if yes, invoke helpers. (can you check state in
+      // componentdidmount lifecycle?)
+    );
   }
 
   render() {
