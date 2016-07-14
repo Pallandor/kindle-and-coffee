@@ -4,10 +4,11 @@ const automationHandler = (req, res) => {
   browser
     .init()
     .url(config.url)
-    .setValue(config.searchBar, config.message)
-    .click(config.buttonByName)
-    .getTitle()
-    .then(title => res.send(`The title received was ${title}`))
+    .selectByAttribute('#grindOption', 'value', '79')
+    // .setValue(config.searchBar, config.message)
+    // .click(config.buttonByName)
+    // .getTitle()
+    // .then(title => res.send(`The title received was ${title}`))
     .pause(config.waitTime)
     .end();
 };
