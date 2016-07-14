@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist/",
     "prestart": "npm run clean",
-    "start": "NODE_ENV=production concurrently -r 'webpack --progress --watch' 'babel-node server.js'",
-    "dev": "npm run clean && concurrently -r 'webpack --progress --watch' 'babel-node server.js'"
+    "start": "NODE_ENV=production concurrently -r 'webpack --progress --watch' 'babel-node server'",
+    "dev": "npm run clean && concurrently -r 'webpack --progress --watch' 'babel-node server'"
   },
   "repository": {
     "type": "git",
