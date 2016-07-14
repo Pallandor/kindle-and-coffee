@@ -1,10 +1,9 @@
-// Attempt to import npm package.
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './components/app'; 
+
 ReactDOM.render(
-  <div>
-    Hello Coffee Automation!
-  </div>,
+  <App/>,
   document.getElementById('root')
 );
