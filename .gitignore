@@ -3,7 +3,10 @@ npm-debug.log
 
 # Dependency directory
 node_modules
+
+# Dirs
 dist
+server/automation/assets
 
 # env variables
 .env
