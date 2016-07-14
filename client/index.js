@@ -1,5 +1,3 @@
-// Working ES6 transpilation!
-
 // Attempt to import npm package.
 import React from 'react';
 import ReactDOM from 'react-dom';
