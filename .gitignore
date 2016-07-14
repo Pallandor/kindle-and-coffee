@@ -1,5 +1,9 @@
+# Misc
+npm-debug.log
+
 # Dependency directory
 node_modules
+dist
 
 # env variables
 .env

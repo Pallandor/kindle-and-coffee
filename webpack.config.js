@@ -6,7 +6,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: devmode ? '[name].[hash].js' : '[name].[chunkhash].js',
+    filename: '[name].[chunkhash].js',
   },
 
   devtool: 'source-map',
