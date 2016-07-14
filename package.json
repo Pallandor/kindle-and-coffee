@@ -1,0 +1,20 @@
+{
+  "name": "kindle-and-coffee",
+  "version": "1.0.0",
+  "description": "Your coffee is only one click away.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pallandor/kindle-and-coffee.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pallandor/kindle-and-coffee/issues"
+  },
+  "homepage": "https://github.com/Pallandor/kindle-and-coffee#readme"
+}
