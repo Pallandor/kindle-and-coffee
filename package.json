@@ -44,6 +44,7 @@
     "express": "4.14.0",
     "react": "15.2.1",
     "react-dom": "15.2.1",
+    "selenium-standalone": "5.5.0",
     "webdriverio": "4.2.1"
   }
 }

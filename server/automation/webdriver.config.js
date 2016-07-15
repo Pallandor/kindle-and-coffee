@@ -3,6 +3,7 @@ const options = {
   desiredCapabilities: {
     browserName: 'firefox',
   },
+  services: ['selenium-standalone'],
 };
 export default webdriverio.remote(options);
 
