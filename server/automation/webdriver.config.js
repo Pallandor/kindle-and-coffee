@@ -10,4 +10,4 @@ export const url = 'https://www.coffeecompany.com.au/coffee/flavoured/swiss-choc
 export const searchBar = '#lst-ib'; 
 export const message = 'Roger feeds alot in Dota 2';
 export const buttonByName = '[name="btnK"]';
-export const waitTime = 20000;
+export const waitTime = 50000;
