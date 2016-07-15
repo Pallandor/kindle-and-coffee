@@ -4,11 +4,13 @@
   "description": "Your coffee is only one click away.",
   "main": "index.js",
   "scripts": {
+    "pretest": "echo \"Error: no pretest specified\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist/",
-    "prestart": "npm run clean",
-    "start": "NODE_ENV=production concurrently -r 'webpack --progress --watch' 'babel-node server'",
-    "dev": "npm run prestart && concurrently -r 'java -jar server/automation/assets/selenium-server-standalone-2.53.0.jar' 'webpack --progress --watch' 'babel-node server'"
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack",
+    "start": "NODE_ENV=production babel-node server",
+    "dev": "npm run prestart && concurrently -r 'webpack --progress --watch' 'babel-node server'"
   },
   "repository": {
     "type": "git",
