@@ -1,13 +1,10 @@
 import React from 'react';
-
-const testClick = () => {
-  alert('blah!'); 
-};
+import * as helpers from '../../helpers';
 
 const App = () => (
   <div>
-    <p>Hello Coffee Automation! From App!</p>
-    <button onClick={testClick}>Click me to order your 1kg of coffee!</button>
+    <h3>Welcome to Kindle & Coffee</h3>
+    <button onClick={helpers.redirectTo('http://localhost:3000/getcoffee')}>Click me to order your 1kg of coffee!</button>
   </div>
 );
 

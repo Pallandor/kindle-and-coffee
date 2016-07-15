@@ -7,7 +7,7 @@ const automationHandler = (req, res) => {
     .selectByAttribute('#grindOption', 'value', '79')
     .selectByAttribute('#sizeOption', 'value', '5')
     .click('#AddToBag')
-    .waitForExist('#bag-CTA[class="btn-holder checkout"]', 10000)
+    .waitForExist('#bag-CTA[class="btn-holder checkout"]', 20000)
     .click('#Checkout')
     .click('a.btn[href="/checkout"]')
     .setValue('#BillingAddress_FirstName', 'Roger')
@@ -22,17 +22,16 @@ const automationHandler = (req, res) => {
     .click('#IsShippingSameAsBillingAddress')
     .click('#75')
     .click('#paypalPayment')
-    .waitForVisible('input.pp.checkout-btn', 5000)
+    .waitUntil(() =>
+      browser
+      .isVisible('input.pp.checkout-btn'), 20000)
     .click('input.pp.checkout-btn')
     .waitUntil(() =>
       browser
       .getUrl()
-      .then(actualUrl =>
-        /paypal/.test(actualUrl)))
+      .then(actualUrl => /paypal/.test(actualUrl)), 20000)
     .getUrl()
-    .then(paypalUrl => {
-      res.redirect(paypalUrl);
-    })
+    .then(paypalUrl => res.redirect(paypalUrl))
     .end();
 };
 
