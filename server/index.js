@@ -4,7 +4,6 @@ import automationHandler from './automation';
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
-
 app.get('/getcoffee', automationHandler);
 
 app.listen(app.get('port'), () => {

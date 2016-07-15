@@ -6,6 +6,13 @@ const automationHandler = (req, res) => {
   browser
     .init()
     .url(config.url)
+    .getUrl()
+    .then( currentUrl => {
+      console.log('++++++++++');
+      console.log(`The current NODE_ENV is set to: ${process.env.NODE_ENV}`);
+      console.log(`The currentUrl is ${currentUrl}`); 
+      console.log('++++++++++');
+    })
     .selectByAttribute('#grindOption', 'value', '79')
     .selectByAttribute('#sizeOption', 'value', '5')
     .click('#AddToBag')
