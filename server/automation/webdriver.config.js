@@ -7,8 +7,4 @@ const options = {
 export default webdriverio.remote(options);
 
 export const url = 'https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate';
-// Note: Refactor below 
-export const searchBar = '#lst-ib'; 
-export const message = 'Roger feeds alot in Dota 2';
-export const buttonByName = '[name="btnK"]';
-export const waitTime = 50000;
+export const waitTime = 20000;

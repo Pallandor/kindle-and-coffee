@@ -1,38 +1,14 @@
-import browser, * as config from './webdriver.config.js';
+import browser from './webdriver.config.js';
+import * as automate from './automations.js';
 
-const automationHandler = (req, res) => {
+const automationHandler = (req, res) =>
   browser
-    .init()
-    .url(config.url)
-    .selectByAttribute('#grindOption', 'value', '79')
-    .selectByAttribute('#sizeOption', 'value', '5')
-    .click('#AddToBag')
-    .waitForExist('#bag-CTA[class="btn-holder checkout"]', 20000)
-    .click('#Checkout')
-    .click('a.btn[href="/checkout"]')
-    .setValue('#BillingAddress_FirstName', 'Roger')
-    .setValue('#BillingAddress_LastName', 'Sejas')
-    .setValue('#BillingAddress_Address1', '2 Holbrook Street')
-    .selectByAttribute('#BillingAddress_Country', 'value', '14')
-    .selectByAttribute('#BillingAddress_StateId', 'value', '52')
-    .setValue('#BillingAddress_Suburb', 'Bossley Park')
-    .setValue('#BillingAddress_Postcode', '2176')
-    .setValue('#BillingAddress_Phone', '0447773180')
-    .setValue('#BillingAddress_Email', 'rogersejas@gmail.com')
-    .click('#IsShippingSameAsBillingAddress')
-    .click('#75')
-    .click('#paypalPayment')
-    .waitUntil(() =>
-      browser
-      .isVisible('input.pp.checkout-btn'), 20000)
-    .click('input.pp.checkout-btn')
-    .waitUntil(() =>
-      browser
-      .getUrl()
-      .then(actualUrl => /paypal/.test(actualUrl)), 20000)
-    .getUrl()
-    .then(paypalUrl => res.redirect(paypalUrl))
-    .end();
-};
+  .then(automate.getHomepage(browser))
+  .then(automate.addCoffeeAndCheckout(browser))
+  .then(automate.addCheckoutBillingDetails(browser))
+  .then(automate.addCheckoutOptions(browser))
+  .then(automate.clickPaypalCheckout(browser))
+  .then(automate.redirectClient(browser, res))
+  .end();
 
 export default automationHandler;
