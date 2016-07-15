@@ -22,7 +22,13 @@ const automationHandler = (req, res) => {
     .click('#IsShippingSameAsBillingAddress')
     .click('#75')
     .click('#paypalPayment')
+    .waitForVisible('input.pp.checkout-btn', 5000)
     .click('input.pp.checkout-btn')
+    .waitUntil(() =>
+      browser
+      .getUrl()
+      .then(actualUrl =>
+        /paypal/.test(actualUrl)))
     .getUrl()
     .then(paypalUrl => {
       res.redirect(paypalUrl);
