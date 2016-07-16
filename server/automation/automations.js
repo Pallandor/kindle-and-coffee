@@ -1,14 +1,26 @@
 import * as config from './webdriver.config.js';
 
-export const getHomepage = browserInstance => () => browserInstance.init().url(config.url);
+export const startBrowser = browserInstance => () =>
+  browserInstance
+  .init();
 
-export const addCoffeeAndCheckout = browserInstance => () =>
+export const getCoffeePage = browserInstance => () =>
+  browserInstance
+  .url(config.url);
+
+export const addCoffee = browserInstance => () =>
   browserInstance
   .selectByAttribute('#grindOption', 'value', '79')
   .selectByAttribute('#sizeOption', 'value', '5')
-  .click('#AddToBag')
+  .click('#AddToBag');
+
+export const clickCheckout = browserInstance => () =>
+  browserInstance
   .waitForExist('#bag-CTA[class="btn-holder checkout"]', config.waitTime)
-  .click('#Checkout')
+  .click('#Checkout');
+
+export const clickContinueAsGuest = browserInstance => () =>
+  browserInstance
   .click('a.btn[href="/checkout"]');
 
 export const addCheckoutBillingDetails = browserInstance => () =>
