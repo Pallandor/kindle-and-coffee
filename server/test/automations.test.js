@@ -8,11 +8,14 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   let childSeleniumProcess = null;
   this.timeout(25000);
   before(function(done) {
-    startSelenium(function(err, child) {
-      if (err) return done(err);
-      childSeleniumProcess = child;
-      done();
-    });
+    startSelenium
+      .then(function(child) {
+        childSeleniumProcess = child;
+        done();
+      })
+      .catch(function(err) {
+        done(err);
+      });
   });
 
   describe('# getHomepage --', function() {
@@ -33,7 +36,7 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     });
   });
 
-  after(function(done){
+  after(function(done) {
     childSeleniumProcess.kill();
     done();
   });

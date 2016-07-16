@@ -1,21 +1,19 @@
 import selenium from 'selenium-standalone';
+import Promise from 'bluebird';
 
 const installConfig = {};
 
-const startSelenium = callback => {
-  console.log("inside start selenium!!");
-  selenium.install(installConfig, (installError) => {
-    console.log('inside selenium install!');
-    if (installError) return callback(installError);
+const startSelenium = new Promise((resolve, reject) => {
+  selenium.install(installConfig, installError => {
+    if (installError) return reject(installError);
     selenium.start((startErr, childInstance) => {
-      console.log('++ inside ACTUAL selenium.start!');
-      if (startErr) return callback;
+      if (startErr) return reject(startErr);
       childInstance.stderr.on('data', function(data) {
         console.log(data.toString());
       });
-      callback(null, childInstance);
+      resolve(childInstance);
     });
   });
-};
+});
 
 export default startSelenium;
