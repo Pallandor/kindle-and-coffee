@@ -12,6 +12,6 @@ const automationHandler = (req, res) =>
   .then(automate.addCheckoutOptions(browser))
   .then(automate.clickPaypalCheckout(browser))
   .then(automate.redirectClient(browser, res))
-  .end();
+  .then(automate.stopBrowser(browser));
 
 export default automationHandler;

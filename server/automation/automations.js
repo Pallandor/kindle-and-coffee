@@ -55,3 +55,7 @@ export const redirectClient = (browserInstance, res) => () =>
   .then(() =>
     browserInstance.getUrl()
     .then(paypalUrl => res.redirect(paypalUrl)));
+
+export const stopBrowser = browserInstance => () => 
+  browserInstance
+    .end();

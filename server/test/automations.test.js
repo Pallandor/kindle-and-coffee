@@ -97,11 +97,11 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
           done();
         })
         .getText('#totalPrice')
-        .then(function(totalPrice){
+        .then(function(totalPrice) {
           expect(totalPrice).to.match(/\$15\.00/i);
           done();
         })
-        .catch(function(err){
+        .catch(function(err) {
           done(err);
         });
     });
@@ -156,7 +156,12 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   });
 
   after(function(done) {
-    childSeleniumProcess.kill();
-    done();
+    // move stopBrowser to own test suite
+    browser
+      .then(automate.stopBrowser(browser))
+      .then(() => {
+        childSeleniumProcess.kill();
+        done();
+      });
   });
 });
