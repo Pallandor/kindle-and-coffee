@@ -47,7 +47,7 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
       browser
         .getTitle()
         .then(function(retrievedTitle) {
-          expect(retrievedTitle).to.equal('Swiss Chocolate');
+          expect(retrievedTitle).to.match(/Swiss\s*Chocolate/i);
           done();
         })
         .catch(function(err) {
@@ -66,7 +66,7 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
         })
         .getText('#grindOption option[value="79"]')
         .then(function(retrievedText) {
-          expect(retrievedText).to.equal('Aeropress');
+          expect(retrievedText).to.match(/Aeropress/i);
           done();
         })
         .catch(function(err) {
@@ -81,17 +81,32 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
         })
         .getText('#sizeOption option[value="5"]')
         .then(function(retrievedText) {
-          expect(retrievedText).to.equal('1 kg');
+          expect(retrievedText).to.match(/1\s*kg/i);
           done();
         })
         .catch(function(err) {
           done(err);
         });
     });
-    it('should display the coffee selection price and total', function(done) {
-      expect(true).to.equal(true);
-      done();
+    it('should display the correct coffee selection price and total', function(done) {
+      browser
+        .getText('#js-coffee-price')
+        .then(function(coffeePricePerKg) {
+          expect(coffeePricePerKg).to.match(/\$30\.00\/kg/i);
+          expect(true).to.equal(true);
+          done();
+        })
+        .getText('#totalPrice')
+        .then(function(totalPrice){
+          expect(totalPrice).to.match(/\$15\.00/i);
+          done();
+        })
+        .catch(function(err){
+          done(err);
+        });
     });
+    // test suite to see if it added it to the cart at this point?
+    // #topHeader ul.bag-items li.item a.item-link[href="/coffee/flavoured/swiss-chocolate"]
   });
 
   describe('# clickCheckout --', function() {
