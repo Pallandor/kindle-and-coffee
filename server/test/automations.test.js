@@ -5,23 +5,12 @@ import * as automate from '../automation/automations';
 import startSelenium from '../automation/selenium';
 import * as helpers from './helpers';
 
-// function createValueTest(selector, expectedValue, browserInst, done, chaiExpect) {
-//   return browser
-//     .getValue(selector)
-//     .then(function(actualValue) {
-//       expect(actualValue).to.equal(expectedValue) // exact match, bring in values/correlations via obj!
-//       done();
-//     })
-//     .catch(function(err) {
-//       done(err);
-//     });
-// };
-
-
 describe('## Automation Tasks for coffeecompany.com.au', function() {
   let childSeleniumProcess = null;
   this.timeout(30000);
   before(function(done) {
+    console.log('++++ inside MOCHA tests, what is node_env: ', process.env.NODE_ENV);
+    console.log('+++++++'); 
     startSelenium
       .then(function(child) {
         childSeleniumProcess = child;
@@ -130,7 +119,7 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     });
     it('should display the correct coffee selection price and total', function(done) {
       browser
-        .pause(1000) // pause due to rendering selection to display taking a little while
+        .pause(5000) // long pause to allow selection to render to screen
         .getText('#js-coffee-price')
         .then(function(coffeePricePerKg) {
           expect(coffeePricePerKg).to.match(/\$30\.00\/kg/i);
@@ -231,37 +220,43 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
         });
     });
     it('should correctly add first name', function(done) {
-      browser
-        .getValue('#BillingAddress_FirstName')
-        .then(function(firstName) {
-          expect(firstName).to.equal('Roger') // exact match, bring in values/correlations via obj!
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.createValueTest('#BillingAddress_FirstName', 'Roger', browser, done);
     });
     it('should correctly add last name', function(done) {
-      browser
-        .getValue('#BillingAddress_LastName')
-        .then(function(lastName) {
-          expect(lastName).to.equal('Sejas') // exact match, bring in values/correlations via obj!
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
-    });
-    it('should correctly add last name v2.0', function(done) {
       helpers.createValueTest('#BillingAddress_LastName', 'Sejas', browser, done);
     });
-
+    it('should correctly add Street Address', function(done) {
+      helpers.createValueTest('#BillingAddress_Address1', '2 Holbrook Street', browser, done);
+    });
+    it('should correctly select Country', function(done) {
+      helpers.createSelectedTest('#BillingAddress_Country option[value="14"]', browser, done);
+    });
+    it('should correctly select State', function(done) {
+      helpers.createSelectedTest('#BillingAddress_StateId option[value="52"]', browser, done);
+    });
+    it('should correctly add Suburb', function(done) {
+      helpers.createValueTest('#BillingAddress_Suburb', 'Bossley Park', browser, done);
+    });
+    it('should correctly add Postcode', function(done) {
+      helpers.createValueTest('#BillingAddress_Postcode', '2176', browser, done);
+    });
+    it('should correctly add Phone Number', function(done) {
+      helpers.createValueTest('#BillingAddress_Phone', '0447773180', browser, done);
+    });
+    it('should correctly add Email', function(done) {
+      helpers.createValueTest('#BillingAddress_Email', 'roger.sejas@gmail.com', browser, done);
+    });
   });
 
+  // failing, looking at DOM, appears html doesnt render selected attribute on selection,
+  // only 'checked' class modification, this may be reason for failure? 
+  // but .checked on DOM element in console works. Review later. 
   describe('# addCheckoutOptions --', function() {
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    it('should select eParcel Post (Regular Shipping) ', function(done) {
+      helpers.createSelectedTest('input[name="ShippingType"][value="75"]', browser, done);
+    });
+    it('should select Paypal Payment ', function(done) {
+      helpers.createSelectedTest('#paypalPayment[value="PayPal"]', browser, done);
     });
   });
 

@@ -12,3 +12,15 @@ export function createValueTest(selector, expectedValue, browserInst, doneInst) 
       doneInst(err);
     });
 };
+
+export function createSelectedTest(selectorWithValue, browserInst, doneInst) {
+  return browserInst
+    .isSelected(selectorWithValue)
+    .then(function(isSelected) {
+      expect(isSelected).to.equal(true);
+      doneInst();
+    })
+    .catch(function(err) {
+      doneInst(err);
+    });
+};

@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "pretest": "echo \"Error: no pretest specified\"",
-    "test": "mocha --compilers js:babel-register server/test/automations.test.js",
+    "test": "NODE_ENV=development mocha --compilers js:babel-register server/test/automations.test.js",
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack",
     "start": "NODE_ENV=production babel-node server",
-    "dev": "npm run prestart && concurrently -r 'webpack --progress --watch' 'babel-node server'"
+    "dev2": "npm run prestart && concurrently -r 'webpack --progress --watch' 'babel-node server'"
   },
   "repository": {
     "type": "git",
