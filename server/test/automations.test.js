@@ -3,6 +3,20 @@ import { expect } from 'chai';
 import browser from '../automation/webdriver.config';
 import * as automate from '../automation/automations';
 import startSelenium from '../automation/selenium';
+import * as helpers from './helpers';
+
+// function createValueTest(selector, expectedValue, browserInst, done, chaiExpect) {
+//   return browser
+//     .getValue(selector)
+//     .then(function(actualValue) {
+//       expect(actualValue).to.equal(expectedValue) // exact match, bring in values/correlations via obj!
+//       done();
+//     })
+//     .catch(function(err) {
+//       done(err);
+//     });
+// };
+
 
 describe('## Automation Tasks for coffeecompany.com.au', function() {
   let childSeleniumProcess = null;
@@ -19,20 +33,37 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   });
 
   describe('# startBrowser --', function() {
+    before(function(done) {
+      browser
+        .then(automate.startBrowser(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
     it('should start a new browser instance', function(done) {
-      // browser
-      //   .then(automate.startBrowser(browser))
-      // read webdriverio API, figure out what to test.
+      // read webdriverio API, figure out what to test to ensure browser instance begun
       expect(true).to.equal(true);
       done();
     })
   });
 
   describe('# getCoffeePage --', function() {
+    before(function(done) {
+      browser
+        .then(automate.getCoffeePage(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+
     it('should navigate to page with correct url', function(done) {
       browser
-        .then(automate.startBrowser(browser))
-        .then(automate.getCoffeePage(browser))
         .getUrl()
         .then(function(retrievedUrl) {
           expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate');
@@ -57,9 +88,18 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   });
 
   describe('# addCoffee --', function() {
-    it('should add the correct coffee grind', function(done) {
+    before(function(done) {
       browser
         .then(automate.addCoffee(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should add the correct coffee grind', function(done) {
+      browser
         .isSelected('[value="79"]')
         .then(function(isGrindSelected) {
           expect(isGrindSelected).to.equal(true);
@@ -90,15 +130,15 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     });
     it('should display the correct coffee selection price and total', function(done) {
       browser
+        .pause(1000) // pause due to rendering selection to display taking a little while
         .getText('#js-coffee-price')
         .then(function(coffeePricePerKg) {
           expect(coffeePricePerKg).to.match(/\$30\.00\/kg/i);
           expect(true).to.equal(true);
-          done();
         })
         .getText('#totalPrice')
         .then(function(totalPrice) {
-          expect(totalPrice).to.match(/\$15\.00/i);
+          expect(totalPrice).to.match(/\$30\.00/i);
           done();
         })
         .catch(function(err) {
@@ -110,28 +150,112 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   });
 
   describe('# clickCheckout --', function() {
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    before(function(done) {
+      browser
+        .then(automate.clickCheckout(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    it('should navigate to the correct url ', function(done) {
+      browser
+        .getUrl()
+        .then(function(retrievedUrl) {
+          expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout/signin');
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should navigate to page with correct title ', function(done) {
+      browser
+        .getTitle()
+        .then(function(retrievedTitle) {
+          expect(retrievedTitle).to.match(/Sign\s*in/i);
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
   });
 
   describe('# clickContinueAsGuest --', function() {
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    before(function(done) {
+      browser
+        .then(automate.clickContinueAsGuest(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should navigate to page with correct url ', function(done) {
+      browser
+        .getUrl()
+        .then(function(retrievedUrl) {
+          expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout');
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should navigate to page with correct title ', function(done) {
+      browser
+        .getTitle()
+        .then(function(retrievedTitle) {
+          expect(retrievedTitle).to.match(/Checkout/i);
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
   });
 
   describe('# addCheckoutBillingDetails --', function() {
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    before(function(done) {
+      browser
+        .then(automate.addCheckoutBillingDetails(browser))
+        .then(function() {
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
+    it('should correctly add first name', function(done) {
+      browser
+        .getValue('#BillingAddress_FirstName')
+        .then(function(firstName) {
+          expect(firstName).to.equal('Roger') // exact match, bring in values/correlations via obj!
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should correctly add last name', function(done) {
+      browser
+        .getValue('#BillingAddress_LastName')
+        .then(function(lastName) {
+          expect(lastName).to.equal('Sejas') // exact match, bring in values/correlations via obj!
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    });
+    it('should correctly add last name v2.0', function(done) {
+      helpers.createValueTest('#BillingAddress_LastName', 'Sejas', browser, done);
+    });
+
   });
 
   describe('# addCheckoutOptions --', function() {
