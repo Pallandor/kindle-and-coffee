@@ -9,8 +9,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   let childSeleniumProcess = null;
   this.timeout(30000);
   before(function(done) {
-    console.log('++++ inside MOCHA tests, what is node_env: ', process.env.NODE_ENV);
-    console.log('+++++++'); 
     startSelenium
       .then(function(child) {
         childSeleniumProcess = child;
@@ -23,17 +21,18 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# startBrowser --', function() {
     before(function(done) {
-      browser
-        .then(automate.startBrowser(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.startBrowser, browser, done);
+      // browser
+      //   .then(automate.startBrowser(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
     });
     it('should start a new browser instance', function(done) {
-      // read webdriverio API, figure out what to test to ensure browser instance begun
+      /** read webdriverio API, figure out what to test to ensure browser instance begun */
       expect(true).to.equal(true);
       done();
     })
@@ -41,14 +40,15 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# getCoffeePage --', function() {
     before(function(done) {
-      browser
-        .then(automate.getCoffeePage(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.getCoffeePage, browser, done);
+      // browser
+      //   .then(automate.getCoffeePage(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
     });
 
     it('should navigate to page with correct url', function(done) {
@@ -78,14 +78,15 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# addCoffee --', function() {
     before(function(done) {
-      browser
-        .then(automate.addCoffee(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.addCoffee, browser, done);
+      // browser
+      //   .then(automate.addCoffee(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
     });
     it('should add the correct coffee grind', function(done) {
       browser
@@ -118,8 +119,9 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
         });
     });
     it('should display the correct coffee selection price and total', function(done) {
+      /** long pause to allow selection to render to screen */
       browser
-        .pause(5000) // long pause to allow selection to render to screen
+        .pause(5000)
         .getText('#js-coffee-price')
         .then(function(coffeePricePerKg) {
           expect(coffeePricePerKg).to.match(/\$30\.00\/kg/i);
@@ -134,20 +136,22 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
           done(err);
         });
     });
-    // test suite to see if it added it to the cart at this point?
-    // #topHeader ul.bag-items li.item a.item-link[href="/coffee/flavoured/swiss-chocolate"]
+    /** test suite to see if it added it to the cart at this point?
+        #topHeader ul.bag-items li.item a.item-link[href="/coffee/flavoured/swiss-chocolate"]
+    */
   });
 
   describe('# clickCheckout --', function() {
     before(function(done) {
-      browser
-        .then(automate.clickCheckout(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.clickCheckout, browser, done);
+      // browser
+      //   .then(automate.clickCheckout(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
     });
     it('should navigate to the correct url ', function(done) {
       browser
@@ -175,14 +179,16 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# clickContinueAsGuest --', function() {
     before(function(done) {
-      browser
-        .then(automate.clickContinueAsGuest(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.clickContinueAsGuest, browser, done);
+      // browser
+      //   .then(automate.clickContinueAsGuest(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
+
     });
     it('should navigate to page with correct url ', function(done) {
       browser
@@ -210,14 +216,15 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# addCheckoutBillingDetails --', function() {
     before(function(done) {
-      browser
-        .then(automate.addCheckoutBillingDetails(browser))
-        .then(function() {
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.startAutomation(automate.addCheckoutBillingDetails, browser, done);
+      // browser
+      //   .then(automate.addCheckoutBillingDetails(browser))
+      //   .then(function() {
+      //     done();
+      //   })
+      //   .catch(function(err) {
+      //     done(err);
+      //   });
     });
     it('should correctly add first name', function(done) {
       helpers.createValueTest('#BillingAddress_FirstName', 'Roger', browser, done);
@@ -248,34 +255,71 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     });
   });
 
-  // failing, looking at DOM, appears html doesnt render selected attribute on selection,
-  // only 'checked' class modification, this may be reason for failure? 
-  // but .checked on DOM element in console works. Review later. 
   describe('# addCheckoutOptions --', function() {
+    before(function(done) {
+      helpers.startAutomation(automate.addCheckoutOptions, browser, done);
+    });
+    // helpers.startAutomation(automate.addCheckoutOptions, browser, done);
+    // before(function(done) {
+    //   browser
+    //     .then(automate.addCheckoutOptions(browser))
+    //     .then(function() {
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // })
     it('should select eParcel Post (Regular Shipping) ', function(done) {
-      helpers.createSelectedTest('input[name="ShippingType"][value="75"]', browser, done);
+      /** requires custom checker as uses numerical Id and also uses class to track selected state */
+      browser
+        .getAttribute('input[name="ShippingType"][value="75"]', 'class')
+        .then(function(classAttribute) {
+          expect(classAttribute).to.equal('checked');
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
     it('should select Paypal Payment ', function(done) {
-      helpers.createSelectedTest('#paypalPayment[value="PayPal"]', browser, done);
+      /** requires custom checker as uses class to track selected state */
+      browser
+        .getAttribute('#paypalPayment', 'class')
+        .then(function(classAttribute) {
+          expect(classAttribute).to.equal('checked');
+          done();
+        })
+        .catch(function(err) {
+          done(err);
+        });
     });
   });
 
   describe('# clickPaypalCheckout --', function() {
-    it('should .... ', function(done) {
-      expect(true).to.equal(true);
-      done();
+    before(function(done) {
+      helpers.startAutomation(automate.clickPaypalCheckout, browser, done);
+    });
+    it('should navigate to the correct url ', function(done) {
+      helpers.createUrlTest(/^https:\/\/www\.paypal\.com/, browser, done);
+    });
+    it('should navigate to page with correct title', function(done) {
+      helpers.createPageTitleTest(/Paypal/i, browser, done);
     });
   });
 
   describe('# redirectClient --', function() {
-    it('should .... ', function(done) {
+    it('should have navigated cient to the correct url ', function(done) {
+      /** this test suite is redundant, essentially would be
+      testing stability of Express redirect method on response.
+      Not your responsibility! */
       expect(true).to.equal(true);
       done();
     });
   });
 
   after(function(done) {
-    // move stopBrowser to own test suite
+    /** move stopBrowser to own test suite */
     browser
       .then(automate.stopBrowser(browser))
       .then(() => {

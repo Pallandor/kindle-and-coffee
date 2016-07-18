@@ -1,6 +1,48 @@
 import { expect } from 'chai';
 
-// Test helpers in ES5 to prevent lexical 'this' bindings interfering with Mocha passing around context
+export function startAutomation(automationTask, browserInst, doneInst) {
+  browserInst
+    .then(automationTask(browserInst))
+    .then(function() {
+      doneInst();
+    })
+    .catch(function(err) {
+      doneInst(err);
+    });
+};
+
+export function createUrlTest(expectedUrl, browserInst, doneInst) {
+  return browserInst
+    .getUrl()
+    .then(function(retrievedUrl) {
+      if (typeof expectedUrl === 'string') {
+        expect(retrievedUrl).to.equal(expectedUrl);
+      } else if (expectedUrl instanceof RegExp) {
+        expect(retrievedUrl).to.match(expectedUrl);
+      }
+      doneInst();
+    })
+    .catch(function(err) {
+      doneInst(err);
+    });
+};
+
+export function createPageTitleTest(expectedTitle, browserInst, doneInst) {
+  return browserInst
+    .getTitle()
+    .then(function(retrievedTitle) {
+      if (typeof expectedTitle === 'string') {
+        expect(retrievedTitle).to.match(expectedTitle);
+      } else if (expectedTitle instanceof RegExp) {
+        expect(retrievedTitle).to.match(expectedTitle);
+      }
+      doneInst();
+    })
+    .catch(function(err) {
+      doneInst(err);
+    });
+};
+
 export function createValueTest(selector, expectedValue, browserInst, doneInst) {
   return browserInst
     .getValue(selector)
