@@ -37,7 +37,7 @@ export function createPageTitleTest(expectedTitle, browserInst, doneInst) {
     .getTitle()
     .then(function(retrievedTitle) {
       if (typeof expectedTitle === 'string') {
-        expect(retrievedTitle).to.match(expectedTitle);
+        expect(retrievedTitle).to.equal(expectedTitle);
       } else if (expectedTitle instanceof RegExp) {
         expect(retrievedTitle).to.match(expectedTitle);
       }
