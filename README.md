@@ -15,4 +15,7 @@ npm start
 ```
 
 ### Tests
-
+```bash
+npm run build
+npm run test
+```

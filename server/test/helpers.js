@@ -11,6 +11,11 @@ export function startAutomation(automationTask, browserInst, doneInst) {
     });
 };
 
+/** 
+    Test generators are not chainable, expects testing at atomic level
+    and invokes done as a result 
+  */
+
 export function createUrlTest(expectedUrl, browserInst, doneInst) {
   return browserInst
     .getUrl()

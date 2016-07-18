@@ -22,14 +22,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   describe('# startBrowser --', function() {
     before(function(done) {
       helpers.startAutomation(automate.startBrowser, browser, done);
-      // browser
-      //   .then(automate.startBrowser(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
     });
     it('should start a new browser instance', function(done) {
       /** read webdriverio API, figure out what to test to ensure browser instance begun */
@@ -42,32 +34,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     before(function(done) {
       helpers.startAutomation(automate.getCoffeePage, browser, done);
     });
-
-    // it('should navigate to page with correct url', function(done) {
-    //   browser
-    //     .getUrl()
-    //     .then(function(retrievedUrl) {
-    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate');
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
-
-    // it('should navigate to page with correct title', function(done) {
-    //   browser
-    //     .getTitle()
-    //     .then(function(retrievedTitle) {
-    //       expect(retrievedTitle).to.match(/Swiss\s*Chocolate/i);
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
-
-
     it('should navigate to the correct url ', function(done) {
       helpers.createUrlTest('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate', browser, done);
     });
@@ -79,14 +45,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   describe('# addCoffee --', function() {
     before(function(done) {
       helpers.startAutomation(automate.addCoffee, browser, done);
-      // browser
-      //   .then(automate.addCoffee(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
     });
     it('should add the correct coffee grind', function(done) {
       browser
@@ -145,29 +103,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     before(function(done) {
       helpers.startAutomation(automate.clickCheckout, browser, done);
     });
-    // it('should navigate to the correct url ', function(done) {
-    //   browser
-    //     .getUrl()
-    //     .then(function(retrievedUrl) {
-    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout/signin');
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
-    // it('should navigate to page with correct title ', function(done) {
-    //   browser
-    //     .getTitle()
-    //     .then(function(retrievedTitle) {
-    //       expect(retrievedTitle).to.match(/Sign\s*in/i);
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
-
     it('should navigate to the correct url ', function(done) {
       helpers.createUrlTest('https://www.coffeecompany.com.au/checkout/signin', browser, done);
     });
@@ -181,28 +116,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     before(function(done) {
       helpers.startAutomation(automate.clickContinueAsGuest, browser, done);
     });
-    // it('should navigate to page with correct url ', function(done) {
-    //   browser
-    //     .getUrl()
-    //     .then(function(retrievedUrl) {
-    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout');
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
-    // it('should navigate to page with correct title ', function(done) {
-    //   browser
-    //     .getTitle()
-    //     .then(function(retrievedTitle) {
-    //       expect(retrievedTitle).to.match(/Checkout/i);
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // });
     it('should navigate to the correct url ', function(done) {
       helpers.createUrlTest('https://www.coffeecompany.com.au/checkout', browser, done);
     });
@@ -288,9 +201,8 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
 
   describe('# redirectClient --', function() {
     it('should have navigated cient to the correct url ', function(done) {
-      /** this test suite is redundant, essentially would be
-      testing stability of Express redirect method on response.
-      Not your responsibility! */
+      /** this test suite is redundant, essentially would be testing stability of 
+      Express redirect method on response. Not your responsibility! */
       expect(true).to.equal(true);
       done();
     });
