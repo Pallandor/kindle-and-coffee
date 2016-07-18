@@ -1,12 +1,24 @@
 const webdriverio = require('webdriverio');
-const options = {
-  desiredCapabilities: {
+
+let desiredCapabilities = {};
+
+if (process.env.NODE_ENV === 'production') {
+  desiredCapabilities = {
+    browserName: 'phantomjs',
+    'phantomjs.binary.path': require('phantomjs').path,
+  };
+} else {
+  desiredCapabilities = {
     browserName: 'firefox',
-  },
-  services: ['selenium-standalone'],
+  };
+}
+
+const options = {
+  desiredCapabilities,
 };
+
 export default webdriverio.remote(options);
 
-// unrelated, refactor out to separate model (also will integrate better w/testing)
+/** Refactor: move to separate module (also will integrate better w/testing) */
 export const url = 'https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate';
 export const waitTime = 20000;

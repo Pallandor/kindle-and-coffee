@@ -42,6 +42,7 @@
     "eslint-plugin-react": "5.2.2",
     "html-webpack-plugin": "2.22.0",
     "mocha": "2.5.3",
+    "phantomjs": "2.1.7",
     "rimraf": "2.5.3",
     "webpack": "1.13.1",
     "webpack-split-by-path": "0.1.0"

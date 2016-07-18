@@ -15,7 +15,8 @@ npm start
 ```
 
 This runs an express server that serves up a bundled and
-minified version of the client.
+minified version of the client. Webdriver automation occurs on
+headless browser instance in production. 
 
 Open `http://localhost:3000` in your browser.
 
@@ -23,3 +24,6 @@ Open `http://localhost:3000` in your browser.
 ```bash
 npm run test
 ```
+
+Webdriver automation occurs on
+firefox browser instance in testing. 

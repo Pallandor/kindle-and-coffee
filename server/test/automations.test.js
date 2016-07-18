@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
+import startSelenium from '../automation/selenium';
 import browser from '../automation/webdriver.config';
 import * as automate from '../automation/automations';
-import startSelenium from '../automation/selenium';
 import * as helpers from './helpers';
 
 describe('## Automation Tasks for coffeecompany.com.au', function() {
