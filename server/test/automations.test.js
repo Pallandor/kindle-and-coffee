@@ -41,38 +41,38 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   describe('# getCoffeePage --', function() {
     before(function(done) {
       helpers.startAutomation(automate.getCoffeePage, browser, done);
-      // browser
-      //   .then(automate.getCoffeePage(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
     });
 
-    it('should navigate to page with correct url', function(done) {
-      browser
-        .getUrl()
-        .then(function(retrievedUrl) {
-          expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate');
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
-    });
+    // it('should navigate to page with correct url', function(done) {
+    //   browser
+    //     .getUrl()
+    //     .then(function(retrievedUrl) {
+    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate');
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
 
+    // it('should navigate to page with correct title', function(done) {
+    //   browser
+    //     .getTitle()
+    //     .then(function(retrievedTitle) {
+    //       expect(retrievedTitle).to.match(/Swiss\s*Chocolate/i);
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
+
+
+    it('should navigate to the correct url ', function(done) {
+      helpers.createUrlTest('https://www.coffeecompany.com.au/coffee/flavoured/swiss-chocolate', browser, done);
+    });
     it('should navigate to page with correct title', function(done) {
-      browser
-        .getTitle()
-        .then(function(retrievedTitle) {
-          expect(retrievedTitle).to.match(/Swiss\s*Chocolate/i);
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.createPageTitleTest(/Swiss\s*Chocolate/i, browser, done);
     });
   });
 
@@ -144,87 +144,76 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
   describe('# clickCheckout --', function() {
     before(function(done) {
       helpers.startAutomation(automate.clickCheckout, browser, done);
-      // browser
-      //   .then(automate.clickCheckout(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
     });
+    // it('should navigate to the correct url ', function(done) {
+    //   browser
+    //     .getUrl()
+    //     .then(function(retrievedUrl) {
+    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout/signin');
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
+    // it('should navigate to page with correct title ', function(done) {
+    //   browser
+    //     .getTitle()
+    //     .then(function(retrievedTitle) {
+    //       expect(retrievedTitle).to.match(/Sign\s*in/i);
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
+
     it('should navigate to the correct url ', function(done) {
-      browser
-        .getUrl()
-        .then(function(retrievedUrl) {
-          expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout/signin');
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+      helpers.createUrlTest('https://www.coffeecompany.com.au/checkout/signin', browser, done);
     });
-    it('should navigate to page with correct title ', function(done) {
-      browser
-        .getTitle()
-        .then(function(retrievedTitle) {
-          expect(retrievedTitle).to.match(/Sign\s*in/i);
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+    it('should navigate to page with correct title', function(done) {
+      helpers.createPageTitleTest(/Sign\s*in/i, browser, done);
     });
+
   });
 
   describe('# clickContinueAsGuest --', function() {
     before(function(done) {
       helpers.startAutomation(automate.clickContinueAsGuest, browser, done);
-      // browser
-      //   .then(automate.clickContinueAsGuest(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
-
     });
-    it('should navigate to page with correct url ', function(done) {
-      browser
-        .getUrl()
-        .then(function(retrievedUrl) {
-          expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout');
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+    // it('should navigate to page with correct url ', function(done) {
+    //   browser
+    //     .getUrl()
+    //     .then(function(retrievedUrl) {
+    //       expect(retrievedUrl).to.equal('https://www.coffeecompany.com.au/checkout');
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
+    // it('should navigate to page with correct title ', function(done) {
+    //   browser
+    //     .getTitle()
+    //     .then(function(retrievedTitle) {
+    //       expect(retrievedTitle).to.match(/Checkout/i);
+    //       done();
+    //     })
+    //     .catch(function(err) {
+    //       done(err);
+    //     });
+    // });
+    it('should navigate to the correct url ', function(done) {
+      helpers.createUrlTest('https://www.coffeecompany.com.au/checkout', browser, done);
     });
-    it('should navigate to page with correct title ', function(done) {
-      browser
-        .getTitle()
-        .then(function(retrievedTitle) {
-          expect(retrievedTitle).to.match(/Checkout/i);
-          done();
-        })
-        .catch(function(err) {
-          done(err);
-        });
+    it('should navigate to page with correct title', function(done) {
+      helpers.createPageTitleTest(/Checkout/i, browser, done);
     });
   });
 
   describe('# addCheckoutBillingDetails --', function() {
     before(function(done) {
       helpers.startAutomation(automate.addCheckoutBillingDetails, browser, done);
-      // browser
-      //   .then(automate.addCheckoutBillingDetails(browser))
-      //   .then(function() {
-      //     done();
-      //   })
-      //   .catch(function(err) {
-      //     done(err);
-      //   });
     });
     it('should correctly add first name', function(done) {
       helpers.createValueTest('#BillingAddress_FirstName', 'Roger', browser, done);
@@ -259,17 +248,6 @@ describe('## Automation Tasks for coffeecompany.com.au', function() {
     before(function(done) {
       helpers.startAutomation(automate.addCheckoutOptions, browser, done);
     });
-    // helpers.startAutomation(automate.addCheckoutOptions, browser, done);
-    // before(function(done) {
-    //   browser
-    //     .then(automate.addCheckoutOptions(browser))
-    //     .then(function() {
-    //       done();
-    //     })
-    //     .catch(function(err) {
-    //       done(err);
-    //     });
-    // })
     it('should select eParcel Post (Regular Shipping) ', function(done) {
       /** requires custom checker as uses numerical Id and also uses class to track selected state */
       browser
